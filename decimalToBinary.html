@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Decimal to Binary Converter</title>
+</head>
+<body>
+
+<p><label>Initial number</label>
+    <input id="getNumber" type="text" value="">
+</p>
+
+<p>
+    <button onclick="clickHandler();">
+        Convert to binary
+    </button>
+</p>
+
+<p><label>Result </label>
+    <input id="resultNumber" type="text"></p>
+
+<script type="text/javascript">
+    function invertArray(arr) {
+        for (let i = arr.length, j = 0; i >= Math.trunc(arr.length/2); i--, j++) {
+
+            var c = arr[j];
+            arr[j] = arr[i];
+            arr[i] = c;
+        }
+
+        return arr;
+    }
+
+    function convertToBinary(initialNumber) {
+        let     arr = [],
+                i = 0,
+                j = 0;
+
+        while (initialNumber > 0.9) {
+            if (initialNumber % 2 === 0) {
+                arr[i] = 0;
+                initialNumber = initialNumber / 2;
+            } else {
+                arr[i] = 1;
+                initialNumber = (initialNumber - 1) / 2;
+            }
+            i++;
+        }
+
+        arr = invertArray(arr);
+        return arr.join("");
+    }
+
+    function clickHandler() {
+        let initialNumber = document.getElementById("getNumber").value;
+        document.getElementById("resultNumber").value = convertToBinary(initialNumber);
+    }
+
+    console.assert(convertToBinary(31) == '11111', '31 should be 11111');
+    console.assert(convertToBinary(8) == '1000', '8 should be 1000');
+
+</script>
+</body>
+</html>
