@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Phrase Bank</title>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="app/data.js"></script>
+    <script src="app/app.js"></script>
+    <link rel="stylesheet" href="node_modules/normalize.css/normalize.css">
+    <link rel="stylesheet" href="app/styles.css">
+</head>
+<body>
+
+<script>
+
+    //  Doubly linked list
+    //
+    //    var head;
+    //    var tail;
+    //
+    //    function addNode(item) {
+    //        var node = {
+    //            prev: null,
+    //            next: null,
+    //            value: item
+    //        }
+    //
+    //        if (head == null) {
+    //            tail = node;
+    //            head = node;
+    //        } else {
+    //            node.prev = tail;
+    //            tail.next = node;
+    //            tail = node;
+    //        }
+    //
+    //    }
+    //
+    //    function getNodeByIndex(index) {
+    //        var step = head;
+    //
+    //        if (index === 0) {
+    //            return step.value;
+    //        } else {
+    //            for (var i = 0; i < index; i++) {
+    //                step = step.next;
+    //            }
+    //            return step.value;
+    //        }
+    //    }
+    //
+    //    debugger;
+    //    addNode(1);
+    //    addNode(2);
+    //    addNode(3);
+    //    addNode(4);
+    //    addNode(5);
+    //    addNode(6);
+    //    getNodeByIndex(4);
+
+
+    function List() {
+        var head;
+        var tail;
+        this.add = function (item) {
+            var node = {
+                prev: null,
+                next: null,
+                value: item
+            }
+
+            if (head == null) {
+                tail = node;
+                head = node;
+            } else {
+                node.prev = tail;
+                tail.next = node;
+                tail = node;
+            }
+        }
+
+        this.get = function (index) {
+            var step = head;
+
+            if (index === 0) {
+                return step.value;
+            } else {
+                for (var i = 0; i < index; i++) {
+                    step = step.next;
+                }
+                return step.value;
+            }
+        }
+
+        this.remove = function (index) {
+            var temp = this.get(index);
+
+            var step = head;
+
+            if (index === 0) {
+                step.next.prev = null;
+                return temp;
+            } else {
+                for (var i = 0; i < index; i++) {
+                    step = step.next;
+                }
+                step.prev.next = step.next;
+                step.next.prev = step.prev;
+                return temp;
+            }
+        }
+
+    }
+
+    debugger;
+    var list1 = new List();
+    list1.add(1);
+    list1.add(3);
+    list1.add(5);
+
+    var list2 = new List();
+    list2.add(10);
+    list2.add(30);
+    list2.add(50);
+
+    console.log(list1.get(2));
+    console.log(list2.get(2));
+
+    console.log( list1.get(2) );
+    console.log( list1.remove(1) ); // 3
+    console.log( list1.get(1) ); //5
+
+    //  Singly linked list
+
+    // function addNode(item) {
+    //    var node = {
+    //        value: item,
+    //        next: null
+    //    }
+    //
+    //     if (head == null) {
+    //         head = node;
+    //         tail = node;
+    //     } else {
+    //
+    //         tail.next = node;
+    //         tail = node;
+    //
+    //
+    ////         var oldTale = tail;
+    ////         tail = node;
+    ////         oldTale.next = tail;
+    //     }
+    // }
+
+
+</script>
+
+</body>
+</html>
